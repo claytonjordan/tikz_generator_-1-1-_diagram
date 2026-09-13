@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="tikz generator.vcxproj" Id="62feef56-ea05-46c8-8ac5-ef3f2cf5917b" />
+</Solution>
