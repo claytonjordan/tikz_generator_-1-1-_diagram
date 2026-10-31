@@ -1,1 +1,1 @@
-Code which can be used to generate tikz code which will draw (pretty nice) 4-tuple (1,1)-diagrams in LaTeX. Uses the (p, a, b, r) parametrization found in Gabriel Doyle's paper.
+C++ code which can be used to generate tikz code which will draw a (pretty nice) 4-tuple (1,1)-diagrams in LaTeX. Uses the (p, a, b, r) parametrization found in Gabriel Doyle's paper, though it can easily be modified to work for the more prevelant (p, q, r, s) convention.
