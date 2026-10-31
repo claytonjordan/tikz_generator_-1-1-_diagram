@@ -6,7 +6,7 @@
 #include <unordered_set>
 
 struct disk {
-    int u, v, nw, nz, sd; // side is 1 if on right side of the meridian (gap is on left side of fundamental region), -1 otherwise
+    int u, v, nw, nz, sd;
 };
 class tikzgen {
     private:
@@ -23,8 +23,7 @@ class tikzgen {
         }
         return false;
     }
-        void getlines(std::pair<int, int>& wdisk, std::pair<int, int>& zdisk, std::vector<std::pair<int, int>>& base, std::vector<int>& lines, std::vector<disk>& disks) { // store lines in the base diagram) { // I think Doyle only considers the diagrams where the first line below the concentric disks on the left goes to above the concentric disks on the right, 
-        //  ie there can't be upwards arcs on the left which don't connect above the right disks. ask Mike. if not idk how to construct the lines
+        void getlines(std::pair<int, int>& wdisk, std::pair<int, int>& zdisk, std::vector<std::pair<int, int>>& base, std::vector<int>& lines, std::vector<disk>& disks) {
         int idx = 1;
         for (int i = 1; i <= a; i++) { // left disks
             base[idx] = { i, 2 * a - i + 1 };
@@ -85,13 +84,7 @@ class tikzgen {
         }
     }
         std::pair<int, int> isconnected(const std::vector<int>& lines) {
-        // check if alpha is connected. return also the intersection number.
-        // we start from the topmost point on the left, then traverse that curve CCW, then proceed in the obvious way from there. 
-        // if we pass through the left side from the interior of the fundamental region, increment by 1. if we pass through from the right side boundary, decrement by 1
-        // every line we traverse, we will cross the left side exactly one time (obviously)
-        // if we are traversing a left side concentric disk, or a line from the right to the left, we increment. if not, we decrement
-        // from proposition 3.4 in Doyle
-        std::vector<int> visited(2 * (p + 1), 0); // we want to visit every point exactly once. make sure this has size 2 * p
+        std::vector<int> visited(2 * (p + 1), 0);
         int cur = 1, cr = 0;
         while (1) {
             if (visited[cur]) {
@@ -287,8 +280,8 @@ class tikzgen {
             getlines(wdisk, zdisk, base, lines, disks);
             std::pair<int, int> flagg = isconnected(lines);
             int conn = flagg.first, cr = flagg.second;
-            if (!conn) { // check alpha is connected
-                std::cout << "alpha is not connected and the 4-tuple doesn't describe a (1,1)-knot" << std::endl;
+            if (!conn) { // check beta is connected
+                std::cout << "beta is not connected and the 4-tuple doesn't describe a (1,1)-knot" << std::endl;
                 return 1;
             }
             if (abs(cr) != 1) { // check the condition for the intersection number. see the comments in isconnected() for a definition of the intersection number
